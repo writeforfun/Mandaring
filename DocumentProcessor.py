@@ -4,7 +4,6 @@ from pdfminer.high_level import extract_text
 import os
 import argparse
 
-
 class DocumentProcessor:
     def __init__(self, filepath=None):
         self.filepath = filepath
@@ -33,21 +32,18 @@ class DocumentProcessor:
         words = jieba.cut(text)
         return " ".join(words)
 
-# 這是一個使用範例：
-# processor = DocumentProcessor()
-# processed_text = processor.preprocess()
-# print(processed_text)
 
 def main():
     parser = argparse.ArgumentParser(description='讀取並印出文字檔案內容')
-    parser.add_argument('filename', help='要讀取的文字檔案名稱')
+    parser.add_argument('filename', nargs='?', default=None, help='要讀取的文字檔案名稱')
 
     args = parser.parse_args()
 
-    with open(args.filename, 'r', encoding='utf-8') as file:
-        content = file.read()
+    processor = DocumentProcessor(args.filename)
+    content = processor.preprocess()
 
     print(content)
+
 
 if __name__ == "__main__":
     main()
