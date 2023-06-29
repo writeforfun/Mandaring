@@ -32,6 +32,8 @@ class DocumentProcessor:
         words = jieba.cut(text)
         return " ".join(words)
 
+    def preprocess2(self):
+        return self.read_file()
 
 def main():
     parser = argparse.ArgumentParser(description='讀取並印出文字檔案內容')
